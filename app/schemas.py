@@ -18,8 +18,13 @@ class usercreate(BaseModel):
     Name: str
     Password: str
     Email: EmailStr #tu dong check validate email co hop li k
+
 class userout(BaseModel):
     Name: str
     Email: EmailStr 
     class Config:
         orm_mode = True
+
+class UserLogin(BaseModel):
+    Email: EmailStr
+    Password: str
