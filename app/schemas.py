@@ -1,5 +1,6 @@
 
 from pydantic import BaseModel, EmailStr
+from typing import Optional
 class posts(BaseModel): #inherit from base model
     name: str
     title: str
@@ -19,7 +20,7 @@ class usercreate(BaseModel):
     Password: str
     Email: EmailStr #tu dong check validate email co hop li k
 
-class userout(BaseModel):
+class userout(BaseModel): #reponese
     Name: str
     Email: EmailStr 
     class Config:
@@ -28,3 +29,9 @@ class userout(BaseModel):
 class UserLogin(BaseModel):
     Email: EmailStr
     Password: str
+
+class Token(BaseModel):
+    access_token: str
+    token_type: str
+class TokenData(BaseModel):
+    id: Optional[str] = None
