@@ -7,11 +7,23 @@ class posts(BaseModel): #inherit from base model
     published: int = 1
     rating: int = 10
 
+class userout(BaseModel): #reponese
+    ID_user: str
+    Name: str
+    Email: EmailStr 
+    class Config:
+        orm_mode = True
+
 class postcreate(posts): #inherit from postd without add any fields hoacwj co the add them filde
+    
     pass
 
+
+
 class postresponse(posts): #inherit for posts, nees co qua nhieu field, khoog the ngon viet lai thi inherit nhu vay
-    ID: int 
+    ID: int
+    owner_id: str
+    owner : userout
     class Config: #di return trar veef sqlschema model neen may khong hieu nen them dong nay der chuyen ve pandetic model
         orm_mode = True
 
@@ -19,12 +31,6 @@ class usercreate(BaseModel):
     Name: str
     Password: str
     Email: EmailStr #tu dong check validate email co hop li k
-
-class userout(BaseModel): #reponese
-    Name: str
-    Email: EmailStr 
-    class Config:
-        orm_mode = True
 
 class UserLogin(BaseModel):
     Email: EmailStr
