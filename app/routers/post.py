@@ -12,7 +12,7 @@ router = APIRouter(
 
 @router.get("/", response_model=list[schemas.postresponse])
 def test_posts(db: session=Depends(get_db), user: schemas.userout=Depends(oauth2.get_current_user),
-                limit: int = 10):
+                limit: int = 4):
     posts = db.query(models.Post2).limit(limit).all()
 
     return posts
