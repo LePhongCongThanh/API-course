@@ -1,6 +1,7 @@
 
 from pydantic import BaseModel, EmailStr
 from typing import Optional
+from pydantic import conint
 class posts(BaseModel): #inherit from base model
     name: str
     title: str
@@ -27,6 +28,24 @@ class postresponse(posts): #inherit for posts, nees co qua nhieu field, khoog th
     class Config: #di return trar veef sqlschema model neen may khong hieu nen them dong nay der chuyen ve pandetic model
         orm_mode = True
 
+class postout(posts):
+    ID: int
+    owner_id: str
+    vote : int
+    class Config: #di return trar veef sqlschema model neen may khong hieu nen them dong nay der chuyen ve pandetic model
+        orm_mode = True
+
+class outpost(BaseModel):
+    ID: int
+    name: str
+    title: str
+
+    vote: int 
+    class Config: #di return trar veef sqlschema model neen may khong hieu nen them dong nay der chuyen ve pandetic model
+        orm_mode = True
+
+
+
 class usercreate(BaseModel):
     Name: str
     Password: str
@@ -41,3 +60,7 @@ class Token(BaseModel):
     token_type: str
 class TokenData(BaseModel):
     id: Optional[str] = None
+
+class vote(BaseModel):
+    post_ID: int
+    dir : conint(le=1) # nho hon hoac bang 1

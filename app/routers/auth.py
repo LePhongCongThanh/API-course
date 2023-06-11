@@ -14,6 +14,7 @@ def login(user_credentials: OAuth2PasswordRequestForm = Depends(), db: session=D
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN,
                             detail=f"Your email does not exit")
     if not utils.verify(user_credentials.password, user.Password):
+        print(utils.verify(user_credentials.password, user.Password))
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN,
                             detail=f"Your password is not correct")
     token = oauth2.create_access_token(data = {"user_ID": user.ID_user}) #lay user ID lam payload

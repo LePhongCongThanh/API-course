@@ -2,19 +2,23 @@ from fastapi import FastAPI, Response, HTTPException, status, Depends, APIRouter
 from .. import models, schemas, oauth2
 from ..database import get_db
 from sqlalchemy.orm import session
+from sqlalchemy import func
 from typing import List, Optional
+from ..models import Post2
 
 router = APIRouter(
     prefix= "/sqlalchemy",
     tags= ["Posts"]
 )
 
- 
-@router.get("/", response_model=list[schemas.postresponse]) #neu k dien gi thi phu thuoc vao depend(default)
+ #,response_model=List[schemas.postout]
+@router.get("/", response_model=List[schemas.postout]) #neu k dien gi thi phu thuoc vao depend(default)
 def test_posts(db: session=Depends(get_db), user: schemas.userout=Depends(oauth2.get_current_user),
                 limit: int=10, skip: int=0, search: Optional[str]=""): # limit la gioi han so bai viet chay ra tu bai viet gan nhat
-    posts = db.query(models.Post2).filter(models.Post2.title.contains(search)).limit(limit).offset(skip).all() #skip=n la bo qua n bài đầu tiên
-
+    posts = db.query(models.Post2,models.Post2.ID, Post2.name, Post2.title, Post2.owner_id,
+                     Post2.published, Post2.rating,func.count(models.vote.ID_user).label("vote")).join(models.vote, models.Post2.ID == models.vote.ID_post, isouter=True
+                                        ).group_by(models.Post2.ID).filter(models.Post2.title.contains(search)).limit(limit).offset(skip).all() #skip=n la bo qua n bài đầu tiên
+    print(posts)
     return posts
 
 @router.get("/posts/{ID}", response_model=schemas.postresponse)

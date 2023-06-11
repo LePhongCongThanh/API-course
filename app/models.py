@@ -25,4 +25,25 @@ class Post2(base):
     owner_id = Column(Integer, ForeignKey("Users.ID_user", ondelete="CASCADE"), nullable=False)
     owner = relationship("user")
 
+class vote(base):
+    __tablename__ = "votes"
+    ID_user = Column(Integer, ForeignKey("Users.ID_user", ondelete="CASCADE"), primary_key=True)
+    ID_post = Column(Integer, ForeignKey("Post_user.ID", ondelete="CASCADE"), primary_key=True) #compositkey
 
+                     
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                     
