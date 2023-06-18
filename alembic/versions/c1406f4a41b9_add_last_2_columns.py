@@ -17,17 +17,17 @@ depends_on = None
 
 
 def upgrade() -> None:
-    op.add_column("posts", sa.Column("name", sa.String(255), nullable=False))
-    op.add_column("posts", sa.Column("published", sa.Boolean, nullable=False, server_default="1"))
-    op.add_column("posts", sa.Column("rating", sa.Integer, nullable=False, server_default="2"))
-    op.add_column("posts", sa.Column("created_at", sa.TIMESTAMP(timezone=True), nullable=False,
+    op.add_column("Post_user", sa.Column("name", sa.String(255), nullable=False))
+    op.add_column("Post_user", sa.Column("published", sa.Boolean, nullable=False, server_default="1"))
+    op.add_column("Post_user", sa.Column("rating", sa.Integer, nullable=False, server_default="2"))
+    op.add_column("Post_user", sa.Column("created_at", sa.TIMESTAMP(timezone=True), nullable=False,
                                       server_default=sa.text("now()")))
     pass
 
 
 def downgrade() -> None:
-    op.drop_column("posts", "name")
-    op.drop_column("posts", "published")
-    op.drop_column("posts", "rating")
-    op.drop_column("posts", "created_at")
+    op.drop_column("Post_user", "name")
+    op.drop_column("Post_user", "published")
+    op.drop_column("Post_user", "rating")
+    op.drop_column("Post_user", "created_at")
     pass

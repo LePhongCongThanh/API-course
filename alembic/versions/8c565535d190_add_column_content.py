@@ -17,10 +17,10 @@ depends_on = None
 
 
 def upgrade() -> None:
-    op.add_column("posts", sa.Column("content",sa.String(255), nullable=False))
+    op.add_column("Post_user", sa.Column("content",sa.String(255), nullable=False))
     pass
 
 
 def downgrade() -> None:
-    op.drop_column("posts","content")
+    op.drop_column("Post_user","content")
     pass

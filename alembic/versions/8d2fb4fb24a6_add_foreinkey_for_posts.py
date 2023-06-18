@@ -19,14 +19,14 @@ depends_on = None
 def upgrade() -> None:
     # op.add_column("posts", sa.Column("owner_id", sa.Integer,
     #                                   sa.ForeignKey("users.ID_user", ondelete="CASCADE"), nullable=False))
-    op.add_column("posts", sa.Column("owner_id", sa.Integer, nullable=False))
-    op.create_foreign_key("posts_ibfk_1", source_table="posts", referent_table="users",
+    op.add_column("Post_user", sa.Column("owner_id", sa.Integer, nullable=False))
+    op.create_foreign_key("posts_ibfk_1", source_table="Post_user", referent_table="Users",
                           local_cols=["owner_id"], remote_cols=["ID_user"], ondelete="CASCADE")
     pass
 
 
 def downgrade() -> None:
     # op.drop_column("posts", "owner_id")
-    op.drop_constraint("posts_ibfk_1", table_name="posts", type_="foreignkey")
-    op.drop_column("posts", "owner_id")
+    op.drop_constraint("posts_ibfk_1", table_name="Post_user", type_="foreignkey")
+    op.drop_column("Post_user", "owner_id")
     pass

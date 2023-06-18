@@ -17,11 +17,11 @@ depends_on = None
 
 
 def upgrade() -> None:
-    op.create_table("posts", sa.Column("ID",sa.Integer, nullable=False, primary_key=True, autoincrement=True),
+    op.create_table("Post_user", sa.Column("ID",sa.Integer, nullable=False, primary_key=True, autoincrement=True),
                     sa.Column("title", sa.String(255), nullable=False))
     pass
 
 
 def downgrade() -> None:
-    op.drop_table("posts")
+    op.drop_table("Post_user")
     pass

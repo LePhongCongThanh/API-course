@@ -9,17 +9,31 @@ from . import models, schemas
 from .database import engine, get_db
 from. import utils
 from .routers import post, user, auth, vote
+from fastapi.middleware.cors import CORSMiddleware
 
 
 
 app = FastAPI() # gọi constructor/instance và gán vào biến app
+
+origins = ["*"] # khong có \ nhé
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+
 app.include_router(post.router) #include vào fastapi
 app.include_router(user.router) 
 app.include_router(auth.router)
 app.include_router(vote.router)
 
-models.base.metadata.create_all(bind=engine) # gọi từ  file model để tạo bảng, tai database
+@app.get("/")
+def root():
+    return {"message":"Hello World"}
 
+# models.base.metadata.create_all(bind=engine) # gọi từ  file model để tạo bảng, tai database
 
- 
 
