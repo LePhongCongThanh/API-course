@@ -1,4 +1,6 @@
 from .database import base
+# lây base tu fiel database đã định nghĩa trước đo, sau đó xây dựng các bảng dựa trên base
+# giúp các bảng liên kêt với database thồn qua base, từ đó tại main file gọi models method create để tạo bảng
 from sqlalchemy import Column, Integer, String, Boolean, ForeignKey
 from sqlalchemy.sql.sqltypes import TIMESTAMP
 from sqlalchemy.sql.expression import null, text
@@ -29,6 +31,12 @@ class vote(base):
     __tablename__ = "votes"
     ID_user = Column(Integer, ForeignKey("Users.ID_user", ondelete="CASCADE"), primary_key=True)
     ID_post = Column(Integer, ForeignKey("Post_user.ID", ondelete="CASCADE"), primary_key=True) #compositkey
+
+# class post(base):
+#     __tablename__ = "Posts"
+#     ID = Column(Integer, nullable=False, primary_key=True, autoincrement=True)
+#     title = Column(String(255), nullable=False)
+
 
                      
 
