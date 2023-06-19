@@ -34,6 +34,12 @@ app.include_router(vote.router)
 def root():
     return {"message":"Hello World"}
 
+# Start the FastAPI application
+if __name__ == "__main__":
+    import uvicorn
+
+    uvicorn.run(app, host="0.0.0.0", port=8000)
+
 # models.base.metadata.create_all(bind=engine) # gọi từ  file model để tạo bảng, tai database
 
 
