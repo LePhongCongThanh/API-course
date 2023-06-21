@@ -32,7 +32,7 @@ app.include_router(vote.router)
 
 @app.get("/")
 def root():
-    return {"message":"Hello World"}
+    return {"message":"Hello World!!"}
 
 # Start the FastAPI application
 if __name__ == "__main__":
